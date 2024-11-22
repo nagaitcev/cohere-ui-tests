@@ -44,11 +44,10 @@ class Navigation:
         return CommunityPage(self.page)
 
     def expand_user_menu(self):
-        with self.page.expect_navigation():
-            self.page.locator(
-                '.z-navigation div.flex-row div[data-component="NavigationUserMenu"] button'
-            ).click()
-        return UserMenu
+        self.page.locator(
+            '.z-navigation div.flex-row div[data-component="NavigationUserMenu"] button'
+        ).click()
+        return UserMenu(self.page)
 
 
 class UserMenu:
@@ -57,7 +56,7 @@ class UserMenu:
 
     def click_logout(self):
         with self.page.expect_navigation():
-            self.page.get_by_text("Log out").click()
+            self.page.get_by_text("Log out").first.click()
         from .login_page import LoginPage
 
         return LoginPage(self.page)

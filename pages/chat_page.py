@@ -37,3 +37,21 @@ class ChatPage(BasePage):
             'div[data-component="Content"] div[id*="message-row"]'
         ).first
         return response_textarea.text_content()
+
+    def upload_file(self, file_paths: str):
+        self.page.locator('input[type="file"][class="hidden"]').set_input_files(
+            file_paths
+        )
+
+    def verify_file_uploaded(self, file_name):
+        assert (
+            file_name
+            in self.page.locator(
+                'div[data-component="EnabledDataSources"]'
+            ).text_content()
+        )
+        error_message = self.page.locator(
+            'p[data-component="FileError"]'
+        ).text_content()
+        if error_message:
+            raise Exception(f"File upload failed:\n{error_message}")

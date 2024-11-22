@@ -164,3 +164,13 @@ secrets.ini
 
 # Logs
 logs/
+
+# Screenshots
+screenshots/
+
+# DS_Store
+.DS_Store
+
+# Test data
+test_data/
+test_file_*.txt
